@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  # The Hunter (You)
+  attacker:
+    build: .
+    container_name: venom-attacker
+    hostname: venom-attacker
+    networks:
+      venom_net:
+        ipv4_address: 10.10.0.5
+    cap_add:
+      - NET_ADMIN  # <--- CRITICAL: Allows promiscuous mode (Sniffing)
+    tty: true
+    volumes:
+      - .:/app
+
+  # The Prey (Simulates a user browsing the web)
+  victim:
+    image: alpine
+    container_name: venom-victim
+    networks:
+      venom_net:
+        ipv4_address: 10.10.0.10
+    # This command forces the victim to constantly reach out to the internet
+    command: sh -c "apk add curl && while true; do curl -I http://example.com; sleep 5; done"
+
+networks:
+  venom_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
