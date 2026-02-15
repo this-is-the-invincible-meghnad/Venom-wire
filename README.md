@@ -16,8 +16,16 @@ Venom-Wire is a Python-based network interceptor that demonstrates Man-in-the-Mi
     * HTTP Header Parsing
     * Credential Capture (POST Data)
 
-## 🚀 Usage
-1. **Build the Lab:**
+## 🚀 Installation & Usage 
+
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/this-is-the-invincible-meghnad/Venom-wire.git](https://github.com/this-is-the-invincible-meghnad/Venom-wire.git)
+cd Venom-wire
+
+```
+**Build the Lab:**
    ```bash
    docker compose up --build -d
    ```
